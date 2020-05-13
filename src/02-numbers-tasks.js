@@ -242,7 +242,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  const number = value
+  const number = value;
   // eslint-disable-next-line no-restricted-globals
   return isNaN(number) || number === null ? def : number;
 }

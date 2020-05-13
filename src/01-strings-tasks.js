@@ -308,6 +308,7 @@ function getCardId(value) {
       return i;
     }
   }
+  return value;
 }
 
 
