@@ -217,12 +217,12 @@ describe('03-arrays-tasks', () => {
   it.optional('insertItem should insert an item at specified position', () => {
     [
       {
-        arr: [1, 3, 4, 5],
+        arr: [1, 2, 3, 4, 5],
         item: 2,
         index: 1,
         expected: [1, 2, 3, 4, 5],
       }, {
-        arr: [1, 'b', 'c'],
+        arr: ['x', 1, 'b', 'c'],
         item: 'x',
         index: 0,
         expected: ['x', 1, 'b', 'c'],
