@@ -146,16 +146,10 @@ function getStringsLength(arr) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
-// eslint-disable-next-line no-unused-vars
+
 function insertItem(arr, item, index) {
-  const ar = [];
-  arr.reduce((array, itm, inx) => {
-    // eslint-disable-next-line no-unused-expressions
-    inx === index ? ar.push(item) && ar.push(itm) : ar.push(itm);
-    return ar;
-  }, []);
-  // eslint-disable-next-line no-unreachable
-  return ar;
+  const newArray = [];
+  return newArray.concat(arr.slice(0, index), item, arr.slice(index, arr.length));
 }
 
 /**

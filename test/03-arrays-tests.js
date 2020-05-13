@@ -217,21 +217,20 @@ describe('03-arrays-tasks', () => {
   it.optional('insertItem should insert an item at specified position', () => {
     [
       {
-        arr: [1, 2, 3, 4, 5],
+        arr: [1, 3, 4, 5],
         item: 2,
         index: 1,
         expected: [1, 2, 3, 4, 5],
       }, {
-        arr: ['x', 1, 'b', 'c'],
+        arr: [1, 'b', 'c'],
         item: 'x',
         index: 0,
         expected: ['x', 1, 'b', 'c'],
       },
     ].forEach((data) => {
-      tasks.insertItem(data.arr, data.item, data.index);
       assert.deepEqual(
         data.expected,
-        data.arr,
+        tasks.insertItem(data.arr, data.item, data.index),
       );
     });
   });
