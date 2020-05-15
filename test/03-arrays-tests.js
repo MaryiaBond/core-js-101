@@ -228,9 +228,10 @@ describe('03-arrays-tasks', () => {
         expected: ['x', 1, 'b', 'c'],
       },
     ].forEach((data) => {
+      tasks.insertItem(data.arr, data.item, data.index);
       assert.deepEqual(
         data.expected,
-        tasks.insertItem(data.arr, data.item, data.index),
+        data.arr,
       );
     });
   });

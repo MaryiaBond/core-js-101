@@ -148,8 +148,7 @@ function getStringsLength(arr) {
  */
 
 function insertItem(arr, item, index) {
-  const newArray = [];
-  return newArray.concat(arr.slice(0, index), item, arr.slice(index, arr.length));
+  return arr.splice(index, 0, item);
 }
 
 /**
