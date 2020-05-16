@@ -463,8 +463,8 @@ function getMatrixProduct(m1, m2) {
       for (let j = 0; j < m.length; j += 1) {
         res += m[j] * m2[j][i];
       }
-      // eslint-disable-next-line no-restricted-globals
-      if (!isNaN(res)) {
+      // if (!isNaN(res)) {
+      if (typeof res === 'number') {
         subC.push(res);
       }
     }
