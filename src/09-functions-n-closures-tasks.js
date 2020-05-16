@@ -47,8 +47,7 @@ function getComposition(f, g) {
  */
 function getPowerFunction(exponent) {
   return function (x) {
-    // eslint-disable-next-line no-restricted-properties
-    return Math.pow(x, exponent);
+    return (x ** exponent);
   };
 }
 
@@ -66,20 +65,16 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  // eslint-disable-next-line consistent-return
+function getPolynom(...args) {
   return (x) => {
-    if (arguments.length === 3) {
-      // eslint-disable-next-line prefer-rest-params,no-restricted-properties
-      return arguments[0] * Math.pow(x, arguments[0]) + arguments[1] * x + arguments[2];
+    if (args.length === 3) {
+      return args[0] * (x ** args[0]) + args[1] * x + args[2];
     }
-    if (arguments.length === 2) {
-      // eslint-disable-next-line prefer-rest-params
-      return arguments[0] * x + arguments[1];
+    if (args.length === 2) {
+      return args[0] * x + args[1];
     }
-    if (arguments.length === 1) {
-      // eslint-disable-next-line prefer-rest-params
-      return arguments[0];
+    if (args.length === 1) {
+      return args[0];
     } return null;
   };
 }
@@ -202,10 +197,8 @@ function partialUsingArguments(fn, ...args1) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-  // eslint-disable-next-line no-param-reassign
-  startFrom -= 1;
-  // eslint-disable-next-line no-param-reassign,no-return-assign
-  return () => startFrom += 1;
+  let id = startFrom - 1;
+  return () => { id += 1; return id; };
 }
 
 

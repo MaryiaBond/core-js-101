@@ -505,17 +505,34 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  const [line1, line2, line3] = position;
-  const columnArr = [[line1[0], line2[0], line3[0]],
-    [line1[1], line2[1], line3[1]], [line1[2], line2[2], line3[2]]];
-  const diagonalArr = [[line1[0], line2[1], line3[2]], [line1[2], line2[1], line3[0]]];
-  const allLineArr = [...position, ...columnArr, ...diagonalArr];
-  const linesX = allLineArr.map((arr) => arr.filter((value) => value === 'X')).map((arr) => arr.length === 3);
-  const linesO = allLineArr.map((arr) => arr.filter((value) => value === '0')).map((arr) => arr.length === 3);
-  if (linesX.includes(true)) {
-    return 'X';
-  } if (linesO.includes(true)) {
-    return '0';
+  if (position[0][2] === position[1][1] && position[2][0] === position[1][1]) {
+    return position[0][2];
+  }
+  if (position[0][0] === position[1][1] && position[1][1] === position[2][2]) {
+    return position[0][0];
+  }
+  if ((position[0][0] === position[0][1]) && (position[0][1] === position[0][2])) {
+    if (position[0][0] !== undefined) {
+      return position[0][0];
+    }
+  }
+  if ((position[0][0] === position[1][0]) && (position[1][0] === position[2][0])) {
+    return position[1][0];
+  }
+  if ((position[0][0] === position[0][1]) && (position[0][1] === position[0][2])) {
+    return position[2][0];
+  }
+  if (position[1][0] === position[1][1] && position[1][1] === position[1][2]) {
+    return position[1][0];
+  }
+  if (position[2][0] === position[2][1] && position[2][1] === position[2][2]) {
+    return position[2][0];
+  }
+  if (position[0][1] === position[1][1] && position[1][1] === position[2][1]) {
+    return position[0][1];
+  }
+  if (position[0][2] === position[1][2] && position[1][2] === position[2][2]) {
+    return position[0][2];
   }
   return undefined;
 }
