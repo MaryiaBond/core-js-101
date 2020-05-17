@@ -28,8 +28,15 @@
  *
  */
 function getFizzBuzz(num) {
-  // eslint-disable-next-line no-nested-ternary
-  return num % 5 === 0 && num % 3 === 0 ? 'FizzBuzz' : num % 3 === 0 ? 'Fizz' : num % 5 === 0 ? 'Buzz' : num;
+  let answere = num;
+  if (num % 5 === 0 && num % 3 === 0) {
+    answere = 'FizzBuzz';
+  } else if (num % 3 === 0) {
+    answere = 'Fizz';
+  } else if (num % 5 === 0) {
+    answere = 'Buzz';
+  }
+  return answere;
 }
 
 
@@ -46,17 +53,17 @@ function getFizzBuzz(num) {
  */
 
 function getFactorial(n) {
+  let subN;
   const factCounter = (counter) => {
     if (counter !== 1) {
-      // eslint-disable-next-line no-param-reassign
-      n *= counter;
+      subN = n * counter;
       factCounter(counter - 1);
     }
   };
   if (n !== 1) {
     factCounter(n - 1);
   }
-  return n;
+  return subN;
 }
 
 
@@ -141,12 +148,11 @@ function doRectanglesOverlap(rect1, rect2) {
   let XColl = false;
   let YColl = false;
 
-  // eslint-disable-next-line max-len
-  if ((rect1.top + rect1.width >= rect2.top) && (rect1.top <= rect2.top + rect2.width)) XColl = true;
-  // eslint-disable-next-line max-len
-  if ((rect1.left + rect1.height >= rect2.left) && (rect1.left <= rect2.left + rect2.height)) YColl = true;
+  if ((rect1.top + rect1.width >= rect2.top)
+    && (rect1.top <= rect2.top + rect2.width)) XColl = true;
+  if ((rect1.left + rect1.height >= rect2.left)
+    && (rect1.left <= rect2.left + rect2.height)) YColl = true;
 
-  // eslint-disable-next-line no-bitwise
   return XColl && YColl;
 }
 
@@ -178,8 +184,8 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-  // eslint-disable-next-line max-len
-  const distancesquared = (point.x - circle.center.x) * (point.x - circle.center.x) + (point.y - circle.center.y) * (point.y - circle.center.y);
+  const distancesquared = (point.x - circle.center.x) * (point.x - circle.center.x)
+    + (point.y - circle.center.y) * (point.y - circle.center.y);
   return distancesquared < circle.radius * circle.radius;
 }
 
@@ -197,7 +203,6 @@ function isInsideCircle(circle, point) {
  */
 function findFirstSingleChar(str) {
   let result = null;
-  // eslint-disable-next-line array-callback-return,consistent-return
   str.split('').some((a, index, array) => {
     const subArray = [...array];
     subArray.splice(index, 1, '');
@@ -205,6 +210,7 @@ function findFirstSingleChar(str) {
       result = a;
       return a;
     }
+    return true;
   });
   return result;
 }
@@ -234,8 +240,11 @@ function findFirstSingleChar(str) {
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   let str = isStartIncluded ? '[' : '(';
-  // eslint-disable-next-line no-unused-expressions
-  a < b ? str = `${str + a}, ${b}` : str = `${str + b}, ${a}`;
+  if (a < b) {
+    str = `${str + a}, ${b}`;
+  } else {
+    str = `${str + b}, ${a}`;
+  }
   str += isEndIncluded ? ']' : ')';
   return str;
 }
@@ -326,17 +335,8 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  // eslint-disable-next-line array-callback-return
-  const summ = (`${num}`).split('').reduce((total, n) => {
-    // eslint-disable-next-line no-param-reassign
-    total += +n;
-    return total;
-  }, 0);
-  return (`${summ}`).split('').reduce((total, n) => {
-    // eslint-disable-next-line no-param-reassign
-    total += +n;
-    return total;
-  }, 0);
+  const summ = (`${num}`).split('').reduce((total, n) => total + n, 0);
+  return (`${summ}`).split('').reduce((total, n) => total + n, 0);
 }
 
 
@@ -362,7 +362,6 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-  // eslint-disable-next-line array-callback-return
   let newStr = str;
   str.split('').forEach(() => {
     newStr = newStr.replace('[]', '').replace('{}', '').replace('<>', '').replace('()', '');
@@ -423,13 +422,14 @@ function getCommonDirectoryPath(pathes) {
     return true;
   };
   const checkPath = [...newPath];
-  // eslint-disable-next-line array-callback-return,consistent-return
+
   checkPath[0].map((p, index) => {
     if (checkIsInArrayLast(p, index)) {
       subResult = index;
     } else {
       return false;
     }
+    return true;
   });
   return subResult === '' ? '' : `${checkPath[0].slice(0, subResult + 1).join('/')}/`;
 }
@@ -454,9 +454,8 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-  const c = [];
-  // eslint-disable-next-line array-callback-return
-  m1.map((m) => {
+  // const c = [];
+  const matrix = m1.reduce((c, m) => {
     const subC = [];
     for (let i = 0; i < m.length; i += 1) {
       let res = 0;
@@ -469,8 +468,9 @@ function getMatrixProduct(m1, m2) {
       }
     }
     c.push(subC);
-  });
-  return c;
+    return c;
+  }, []);
+  return matrix;
 }
 
 

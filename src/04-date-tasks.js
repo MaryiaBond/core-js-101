@@ -116,8 +116,9 @@ function angleBetweenClockHands(date) {
   const angleHours = (hours + (minutes / 60)) * 30;
   const angleMinutes = minutes * 6;
   const result = Math.min((360 - (angleHours - angleMinutes)), (angleHours - angleMinutes));
-  // eslint-disable-next-line no-mixed-operators
-  return Math.abs(result) * Math.PI / 180;
+  const pi = Math.PI;
+  const subRes = pi / 180;
+  return Math.abs(result) * subRes;
 }
 
 

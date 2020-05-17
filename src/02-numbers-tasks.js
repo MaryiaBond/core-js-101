@@ -52,9 +52,6 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  // if (value1 + value2 === 0) {
-  //   return Infinity;
-  // }
   return ((value1 * 1) / 2 + (value2 * 1) / 2);
 }
 
@@ -195,14 +192,14 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
+  let num2 = num;
   if (pow === 1) {
     return Math.round(num / 10) * 10;
   }
   for (let i = 1; i < pow + 1; i += 1) {
-    // eslint-disable-next-line no-param-reassign,no-restricted-properties
-    num = Math.round(num / Math.pow(10, i)) * Math.pow(10, i);
+    num2 = Math.round(num / (10 ** i)) * (10 ** i);
   }
-  return num;
+  return num2;
 }
 
 /**

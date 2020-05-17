@@ -108,8 +108,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  // eslint-disable-next-line use-isnan,no-restricted-globals
-  return arr.filter((a) => a && a !== NaN && a !== '' && a !== undefined && a !== 0);
+  return arr.filter((a) => a && a !== '' && a !== undefined && a !== 0);
 }
 
 /**
@@ -209,16 +208,13 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  // eslint-disable-next-line array-callback-return
   return arr.reduce((total, a, index) => {
     if (index !== arr.length - 1) {
-      // eslint-disable-next-line no-param-reassign
-      total += `${a.join(',')}\n`;
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      total += `${a.join(',')}`;
+      const subTotal = `${total}${a.join(',')}\n`;
+      return subTotal;
     }
-    return total;
+    const subTotal = `${total}${a.join(',')}`;
+    return subTotal;
   }, '');
 }
 
@@ -253,7 +249,6 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  // eslint-disable-next-line array-callback-return
   return arr.reduce((total, a, index) => {
     if (index === 0) {
       total.push(a);
@@ -296,10 +291,8 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
   return arr.reduce((totalArr, item, index) => {
-    // eslint-disable-next-line no-param-reassign
     const newArr = Array(index + 1).fill(0);
-    // eslint-disable-next-line no-unused-vars
-    newArr.map((a) => totalArr.push(item));
+    newArr.map(() => totalArr.push(item));
     return totalArr;
   }, []);
 }
@@ -356,15 +349,13 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-// eslint-disable-next-line consistent-return
+
 function sortDigitNamesByNumericOrder(arr) {
   const numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
   if (arr.length === 0) {
     return [];
   }
-  // eslint-disable-next-line no-param-reassign,no-return-assign,no-unused-vars
   const muArr = arr.map((a) => numbers.indexOf(a));
-  // eslint-disable-next-line no-const-assign
   return muArr.sort((a, b) => a - b).map((a) => numbers[a]);
 }
 
@@ -381,12 +372,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-  // eslint-disable-next-line array-callback-return
-  return arr.reduce((total, a) => {
-    // eslint-disable-next-line no-param-reassign
-    total += a;
-    return total;
-  }, 0);
+  return arr.reduce((total, a) => total + a, 0);
 }
 
 /**
@@ -496,9 +482,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  // eslint-disable-next-line no-param-reassign,no-return-assign
   const arr = Array(n).fill(0);
-  // eslint-disable-next-line array-callback-return
   return arr.reduce((totalArr, item, index) => {
     const adArr = [];
     arr.map((a, ind) => ((ind === index)
@@ -526,10 +510,10 @@ function getIntervalArray(start, end) {
   const lengthOfArray = end - start + 1;
   const arr = Array(lengthOfArray).fill(0);
   let counter = start;
-  // eslint-disable-next-line array-callback-return
   arr.map((a, index) => {
     arr[index] = counter;
     counter += 1;
+    return true;
   });
   return arr;
 }
@@ -547,8 +531,9 @@ function getIntervalArray(start, end) {
  */
 function distinct(arr) {
   return arr.reduce((totalArr, item) => {
-    // eslint-disable-next-line no-unused-expressions
-    totalArr.includes(item) ? totalArr : totalArr.push(item);
+    if (!totalArr.includes(item)) {
+      totalArr.push(item);
+    }
     return totalArr;
   }, []);
 }
@@ -590,16 +575,14 @@ function group(array, keySelector, valueSelector) {
     }
     return total;
   }, []);
-  // eslint-disable-next-line no-undef,no-return-assign
-  return cityArr = countryArr.reduce((total, currntItem) => {
+  return countryArr.reduce((total, currntItem) => {
     const newArr = [];
     newArr.push(currntItem);
-    // eslint-disable-next-line no-shadow
-    newArr.push(array.reduce((total, item) => {
+    newArr.push(array.reduce((total2, item) => {
       if (keySelector(item) === currntItem) {
-        total.push(valueSelector(item));
+        total2.push(valueSelector(item));
       }
-      return total;
+      return total2;
     }, []));
     total.push(newArr);
     return total;
@@ -620,7 +603,7 @@ function group(array, keySelector, valueSelector) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-// eslint-disable-next-line no-unused-vars
+
 function selectMany(arr, childrenSelector) {
   const newArr = arr.map((a) => childrenSelector(a));
   return newArr.flat();
@@ -643,9 +626,7 @@ function getElementByIndexes(arr, indexes) {
   let newArr = arr;
   return indexes.reduce((total, a) => {
     newArr = newArr[a];
-    // eslint-disable-next-line no-param-reassign
-    total = newArr;
-    return total;
+    return newArr;
   }, 0);
 }
 
