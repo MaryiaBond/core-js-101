@@ -53,17 +53,17 @@ function getFizzBuzz(num) {
  */
 
 function getFactorial(n) {
-  let subN;
   const factCounter = (counter) => {
     if (counter !== 1) {
-      subN = n * counter;
+      // eslint-disable-next-line no-param-reassign
+      n *= counter;
       factCounter(counter - 1);
     }
   };
   if (n !== 1) {
     factCounter(n - 1);
   }
-  return subN;
+  return n;
 }
 
 
@@ -203,6 +203,7 @@ function isInsideCircle(circle, point) {
  */
 function findFirstSingleChar(str) {
   let result = null;
+  // eslint-disable-next-line array-callback-return,consistent-return
   str.split('').some((a, index, array) => {
     const subArray = [...array];
     subArray.splice(index, 1, '');
@@ -210,7 +211,6 @@ function findFirstSingleChar(str) {
       result = a;
       return a;
     }
-    return true;
   });
   return result;
 }
@@ -335,8 +335,17 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  const summ = (`${num}`).split('').reduce((total, n) => total + n, 0);
-  return (`${summ}`).split('').reduce((total, n) => total + n, 0);
+  // eslint-disable-next-line array-callback-return
+  const summ = (`${num}`).split('').reduce((total, n) => {
+    // eslint-disable-next-line no-param-reassign
+    total += +n;
+    return total;
+  }, 0);
+  return (`${summ}`).split('').reduce((total, n) => {
+    // eslint-disable-next-line no-param-reassign
+    total += +n;
+    return total;
+  }, 0);
 }
 
 
@@ -462,8 +471,8 @@ function getMatrixProduct(m1, m2) {
       for (let j = 0; j < m.length; j += 1) {
         res += m[j] * m2[j][i];
       }
-      // if (!isNaN(res)) {
-      if (typeof res === 'number') {
+      // eslint-disable-next-line no-restricted-globals
+      if (!isNaN(res)) {
         subC.push(res);
       }
     }
